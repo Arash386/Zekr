@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حل مسئله</title>
+  <style>
+    body {
+      font-family: 'Vazir', sans-serif;
+      background-color: #ffe4e1;
+      color: #444;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+      direction: rtl;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff1493;
+    }
+    .question {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+      z-index: 10;
+    }
+    .input-container {
+      margin-top: 20px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ff1493;
+      border-radius: 5px;
+      outline: none;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: #ff1493;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ff69b4;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #ff1493;
+      display: none;
+    }
+
+    /* بادکنک‌ها */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 50px;
+      height: 70px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: float 10s linear infinite;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background-color: #ff69b4;
+    }
+
+    /* انیمیشن بادکنک */
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) translateX(10px);
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>مسئله ساده</h1>
+  <div class="question">
+    <p>عدد ۵ + ۳ چند می‌شود؟</p>
+    <div class="input-container">
+      <input type="number" id="answer" placeholder="جواب را وارد کنید">
+      <button onclick="checkAnswer()">ارسال</button>
+    </div>
+    <p class="result" id="result">بیا باهم بریم دبی دبی 💃🏿💃🏿💃🏿</p>
+  </div>
+
+  <div id="balloons-container"></div>
+
+  <script>
+    function checkAnswer() {
+      const userAnswer = document.getElementById('answer').value;
+      const result = document.getElementById('result');
+      const balloonsContainer = document.getElementById('balloons-container');
+
+      if (parseInt(userAnswer) === 8) {
+        result.style.display = 'block';
+        createBalloons();
+      } else {
+        alert('جواب اشتباه است. دوباره تلاش کن!');
+      }
+    }
+
+    function createBalloons() {
+      const balloonsContainer = document.getElementById('balloons-container');
+      balloonsContainer.innerHTML = ''; // پاک کردن بادکنک‌های قبلی
+
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * 90 + '%'; // موقعیت تصادفی
+        balloon.style.backgroundColor = getRandomColor(); // رنگ تصادفی
+        balloon.style.animationDuration = Math.random() * 5 + 8 + 's'; // مدت زمان تصادفی
+        balloonsContainer.appendChild(balloon);
+      }
+    }
+
+    function getRandomColor() {
+      const colors = ['#ff69b4', '#ff1493', '#ffa07a', '#ff6eb4', '#ff8c69'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+
+</body></html>
